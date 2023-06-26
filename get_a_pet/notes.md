@@ -197,6 +197,120 @@ Passo a passo da aplicação
     24.1 - Importar o middleware de imageUpload criada na pasta helpers
     24.2 - Inserir a função entre o middleware de autenticação e o controller na rota
     24.3 - Acrescentar o método .array('images') o 'images' deve corresponder no body da req
+
+25 - Trabalhando com a função de retornar todos os pets
+
+    25.1 - Criar função no controller
+    25.2 - Utilizar o método find() para retornar todos e o método sort() para fazer a ordenação, passar por parametros no sort qual a coluna que ele ira ordernar
+    25.3 - Retornar o resultado numa variável e mandar por resposta em json
+    25.4 - Criar a rota GET e passar a função
+
+26 - Trabalhando com a função de retornar todos os pets de um usuário
+
+    26.1 - Criar função no controller
+    26.2 - Resgatar o usuário e armazenar seus dados numa variável
+        26.2.1 - Importar a função get-token do helpers
+        26.2.2 - Importar a função get-user-by-token (Usar o await no momento de resgatar o usuário)
+    26.3 - Utilizar o método find() para retornar todos e o método sort() para fazer a ordenação. passar como parametros no find o user._id para ser comparado com o user._id do BD e no sort qual a coluna que ele ira ordernar
+    26.4 - Retornar o resultado numa variável e mandar por resposta em json
+    26.5 - Criar a rota GET e passar a função
+
+27 - Trabalhando com a função de retornar todos os pets adotados de um usuário
+
+    27.1 - Criar função no controller
+    27.2 - Resgatar o usuário e armazenar seus dados numa variável
+        27.2.1 - Importar a função get-token do helpers
+        27.2.2 - Importar a função get-user-by-token (Usar o await no momento de resgatar o usuário)
+    27.3 - Utilizar o método find() para retornar todos e o método sort() para fazer a ordenação. passar como parametros no find o user._id para ser comparado com o 'adopter._id' do DB e no sort qual a coluna que ele ira ordernar
+    27.4 - Retornar o resultado numa variável e mandar por resposta em json
+    27.5 - Criar a rota GET e passar a função
+
+28 - Trabalhando com a função de retornar um Pet pelo id
+
+    28.1 - Inicialmente importar a função ObjectId do moongose que faz a verificação de um id
+    28.2 - Resgatar o id no pet nos parametros da url
+    28.3 - Verificar a validade do id pelo ObjectId.isValid(id)
+    28.4 - Resgatar o pet no DB pelo método findOne() passando o id como parametro de comparação. Armazenar o resultado numa variavel
+    28.5 - Validar a resposta da query, caso exista ou não o pet
+    28.6 - Retornar o pet solicitado
+
+29 - Trabalhando com a função de remover o pet pelo id
+
+    29.1 - Inicialmente importar a função ObjectId do moongose que faz a verificação de um id
+    29.2 - Resgatar o id no pet nos parametros da url
+    29.3 - Verificar a validade do id pelo ObjectId.isValid(id)
+    29.4 - Resgatar o pet no DB pelo método findOne() passando o id como parametro de comparação. Armazenar o resultado numa variavel
+    29.5 - Validar a resposta da query, caso exista ou não o pet
+    29.6 - Resgatar o usuário dono do pet e armazenar seus dados numa variável
+        29.6.1 - Importar a função get-token do helpers
+        29.6.2 - Importar a função get-user-by-token (Usar o await no momento de resgatar o usuário)
+    29.7 - Verificar se o pet solicitado para a remoção pertecence ao usuário (utilizar o .toString() para comparar os _id)
+    29.8 - Remover o pet com a função Pet.findByIdAndRemove e retronar uma resposta
+    29.9 - Criar a rota DELETE, passar o verifytoken e passar a função
+
+30 - Trabalhando com a função de atualizar o pet
+
+    30.1 - Inicialmente importar a função ObjectId do moongose que faz a verificação de um id
+    30.2 - Resgatar o id no pet nos parametros da url
+    30.3 - Resgatar os campos dos dados no body (req.body)
+    30.4 - Resgatar o campo das imagens (req.file)
+    30.5 - Inicialmente declarar um objeto vazio para armazenar os dados atualizados
+    30.6 - Verificar a validade do id pelo ObjectId.isValid(id)
+    30.7 - Resgatar o pet no DB pelo método findOne() passando o id como parametro de comparação. Armazenar o resultado numa variavel
+    30.8 - Validar a resposta da query, caso exista ou não o pet
+    30.9 - Resgatar o usuário dono do pet e armazenar seus dados numa variável
+        30.9.1 - Importar a função get-token do helpers
+        30.9.2 - Importar a função get-user-by-token (Usar o await no momento de resgatar o usuário)
+    30.10 - Verificar se o pet solicitado para a atualização pertecence ao usuário (utilizar o .toString() para comparar os _id)
+    30.11 - Realizar as validações dos campos
+        30.11.1 - Observações para a validação das imagens:
+            30.11.1.1 - Caso passe na logica da validação, criar um array images no objeto de dados atualizados
+            30.11.1.2 - Utilizar o método map para tratar os dados vindo do req.file para buscar apenas o nome do arquivo de imagem e salvar em seguida no array
+    30.12 - Fazer o envio dos dados atualizados pela função findByIdAndUpdate, passando o id do pet e o objeto com os dados atualizados
+    30.13 - Retornar uma resposta 200
+    30.14 - Criar a rota PATCH, passar o verifytoken, o middleware de upload de fotos e passar a função
+
+31 - Trabalhando com a função de agendar encontro com o pet
+
+    31.1 - Inicialmente importar a função ObjectId do moongose que faz a verificação de um id
+    31.2 - Resgatar o id no pet nos parametros da url
+    31.3 - Verificar a validade do id pelo ObjectId.isValid(id)
+    31.4 - Resgatar o pet no DB pelo método findOne() passando o id como parametro de comparação. Armazenar o resultado numa variavel
+    31.5 - Validar a resposta da query, caso exista ou não o pet
+    31.6 - Resgatar o usuário atual armazenar seus dados numa variável
+        31.6.1 - Importar a função get-token do helpers
+        31.6.2 - Importar a função get-user-by-token (Usar o await no momento de resgatar o usuário)
+    31.7 - Verificar se o pet em questão já não pertence ao usuário, impossibilitando dele agendar uma visita ao proprio pet
+    31.8 - Verificar se o user já possui uma marcação de visita com o pet (dica: lembrar do objeto adopter instanciado no Model pet)
+    31.9 - Adicionar os dados do usuário no objeto adopter
+    31.10 - Fazer o envio dos dados atualizados pela função findByIdAndUpdate, passando o id do pet e o objeto pet com os dados do adopter atualizado
+    31.11 - Retornar uma resposta 200
+    31.12 - Criar a rota PATCH, passar o verifytoken, passar a função
+
+32 - Trabalhando com a função de concluir adoção do pet
+
+    32.1 - Inicialmente importar a função ObjectId do moongose que faz a verificação de um id
+    32.2 - Resgatar o id no pet nos parametros da url
+    32.3 - Verificar a validade do id pelo ObjectId.isValid(id)
+    32.4 - Resgatar o pet no DB pelo método findOne() passando o id como parametro de comparação. Armazenar o resultado numa variavel
+    32.5 - Validar a resposta da query, caso exista ou não o pet
+    32.6 - Resgatar o usuário atual armazenar seus dados numa variável
+        32.6.1 - Importar a função get-token do helpers
+        32.6.2 - Importar a função get-user-by-token (Usar o await no momento de resgatar o usuário)
+    32.7 - Verificar se o pet solicitado para a atualização pertecence ao usuário (utilizar o .toString() para comparar os _id)
+    32.8 - Alterar o available para false (pet adotado)
+    32.10 - Fazer o envio dos dados atualizados pela função findByIdAndUpdate, passando o id do pet e o objeto pet atualizado
+    32.11 - Retornar uma resposta 200
+    32.12 - Criar a rota PATCH, passar o verifytoken, passar a função
+
+
+
+    
+
+
+
+
+
     
     
     
