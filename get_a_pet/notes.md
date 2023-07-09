@@ -303,6 +303,86 @@ Passo a passo da aplicação
     32.11 - Retornar uma resposta 200
     32.12 - Criar a rota PATCH, passar o verifytoken, passar a função
 
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+FRONTEND DA APLICAÇÃO
+
+1 - Preparando setup inicial
+    1.1 - Inicializar o react na pasta frontend: npx create-react-app .
+    1.2 - Instalação dos pacotes: axios, events, react-router-dom, react-icons
+    1.3 - Configurar o .env.local
+    1.4 - Excluir arquivos desnecessários
+        1.4.1 - Manter na pasta public apenas os arquivo de index.html e o favicon de preferencia
+        1.4.2 - Manter na pasta src apenas os arquivos: App.js, index.css, index.js
+    1.5 - Criação de pastas que serão utilizadas durante o processo. components, assets, context, hooks, utils
+
+2 - Configurar css da index.js
+
+3 - Criação das páginas
+    3.1 - Criar uma pasta pages na pasta components
+    3.2 - Separar as páginas em grupos por pasta. Obs.: exceto a pagina Home
+
+4 - Importando o pacote de rotas e as páginas no App.js
+    4.1 - Importar BrowserRoutes, Routes e Route do react-router-dom
+    4.2 - Importar as páginas criadas anteriormente
+    4.3 - Estruturar as funções de rotas no return da função App
+
+5 - Criando Navbar e Footer
+    5.1 - Em components, criar pasta layouts e os arquivos de componentes Footer.js e Navbar.js
+    5.2 - Navbar
+        5.2.1 - Importar Link do react-router-dom
+        5.2.2 - Criar lista e utilizar o Link para referenciar as páginas
+    5.3 - Footer
+        5.3.1 - Criar estrutura básica
+    5.4 - Importar arquivos no App.js e inserir o Navbar antes do Routes e o Footer ao final do Routes
+
+6 - Estilizando os components Navbar e o Footer
+    6.1 - Criar os arquivos module.css
+
+7 - Criação do component Container
+    7.1 - Em components, criar na pasta layouts o arquivo de Container.js
+    7.2 - Importar o componente em App.js abraçando a tag <Routes>
+    7.3 - Colocar {children} no parametro da função Container para que seja possível apresentar os componentes que serão "filhos" de Container
+    7.4 - Criar os arquivo module.css e estilizar
+ 
+8 - Criação do component de Input
+    8.1 - Criar uma pasta em components com o nome form
+    8.2 - Criar o arquivo Input.js e o module.css
+    8.3 - Na função do componente, passar por parametro {type, text, name, placeholder, handleOnChange, value, multiple}
+    8.4 - A função conta com uma div que engloba as tags de label e input. Essas tags receberão os paramêtros
+
+9 - Trabalhando na página de Cadastro (Register.js)
+    9.1 - Importar o component Input.js
+    9.2 - Inserir os inputs necessários para o registro passando os valores dos parametros
+    9.3 - Criar função handleChange
+        9.3.1 - Receber os dados digitados nos input (utilizar o spread operator)
+    9.4 - Criar um Form.module.css para estilar forms em geral
+    9.5 - Criar função handleSubmit
+    9.6 - Criar um helper na pasta utils para exportar a url da api (api.js)
+    9.7 - Criar hook para fazer a autenticação do user
+        9.7.1 - Criar arquivo useAuth.js na pasta hooks
+        9.7.2 - Importar api.js, useState, useEffect, useNavigate
+        9.7.3 - Exportar a função useAuth. Dentro destas funções haverá outras funções que serão utilizadas
+        9.7.4 - Criar função async register(user)
+        9.7.5 - Com o trycatch executar a chamada ajax e mandar via post o user cadastrado (utilizar a função api passando a rota criada no back e o objeto user), armazenar numa variavel
+        9.7.6 - Utilizar promises para dar prosseguimento a função (then)
+        9.7.7 - Retornar a função register
+    9.8 - Criar o UserContext.js na pasta context
+    9.9 - Retornar ao Register.js, importar o Context, fazer o destructuring da função register e utilizá-la no handleSubmit
+    9.10 - Importar o UserProvider no App.js
+
+10 - Trabalhando com o hook de flash message
+
+    10.1 - Criar arquivo bus.js no utils e importar o EventEmitter do event, exportar new EventEmitter()
+    10.2 - Criar hook useFlashMessage
+        10.2.1 - Importar o arquivo bus
+        10.2.2 - Criar função de exportação useFlashMessage
+        10.2.3 - Criar função setFlashMessage para disparar a flash message
+        10.2.4 - Retornar a função setFlashMessage
+
+
+
+
 
 
     

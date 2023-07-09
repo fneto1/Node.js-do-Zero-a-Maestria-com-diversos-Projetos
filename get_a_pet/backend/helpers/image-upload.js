@@ -28,7 +28,7 @@ const imageUpload = multer({
     storage: imageStorage,
     //filtrando apenas imagens que sejam png ou jpg
     fileFilter(req, file, cb){
-        if(!file.originalname.match(/\.(png|jpg)$/)){
+        if(!file.originalname.match(/\.(png|jpg|jpeg)$/)){
             return cb(new Error('Por favor, envie apenas jpg ou png.'))
         }
         //aqui é feito o upload da foto
